@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="lib/FileSaver.js"></script>
+    <script src="lib/Turndown.js"></script>
+</head>
+
+<body>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        <h1>HTML to MD Converter</h1>
+        <p>Upload an HTML file to convert to MD.</p>
+        <div class="form-container">
+            <form id="input-container" action="/action_page.php">
+                <input type="file" id="input" name="filename">
+            </form>
+            <button id="download" onclick="downloadFile()">Download</button>
+        </div>
+        <p>Created with <a href="https://github.com/domchristie/turndown">Turndown</a> and <a href="https://github.com/eligrey/FileSaver.js/">FileSaver</a>.</p>
+    </div>
+    <div class="col-sm-3"></div>
+
+<script>
+    var turndownService = new TurndownService();
+    var markdown;
+    
+    const input = document.getElementById("input");
+
+    input.addEventListener("change", handleFiles, false);
+    function handleFiles() {
+        const fileList = this.files; /* now you can work with the file list */
+
+        const numFiles = fileList.length;
+
+        for (let i = 0, numFiles = fileList.length; i < numFiles; i++) {
+            const file = fileList[i];
+            var fileContents;
+
+            Promise.resolve(file.text()).then(function(data){
+                fileContents = data.toString();
+                markdown = turndownService.turndown(fileContents);
+                console.log(markdown);
+            });
+        }
+    }
+
+    function downloadFile(){
+        if (markdown){
+            var saveFile = new File([markdown], "markdown.md", {});
+            saveAs(saveFile);
+        }
+        else
+            alert("No File Selected!");
+    }
+
+</script>
+
+</body>
+
+</html>
