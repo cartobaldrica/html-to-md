@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8"/>
+
     <title>HTML - MD Converter</title>
     <link rel ="icon" href="img/arrow.ico" type="image/x-icon">
     
@@ -12,7 +14,7 @@
 
     <script src="lib/FileSaver.js"></script>
     <script src="lib/Turndown.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+    <script src="lib/Showdown.js"></script>
 
 </head>
 
@@ -46,6 +48,7 @@
 
     mInput.addEventListener("change", handleHtml, false);
     function handleHtml() {
+        console.log("sup")
         const fileList = this.files; /* now you can work with the file list */
 
         const numFiles = fileList.length;
@@ -102,6 +105,10 @@
         else
             alert("No File Selected!");
     }
+
+    mInput.value = "";
+    hInput.value = "";
+    
 </script>
 
 </body>
