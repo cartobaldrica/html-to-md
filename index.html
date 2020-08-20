@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <title>HTML - MD Converter</title>
+    <link rel ="icon" href="img/arrow.ico" type="image/x-icon">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="css/style.css" rel="stylesheet">
 
@@ -31,7 +34,7 @@
             </form>
             <button id="download2" onclick="downloadFile()">Convert</button>
         </div>
-        <p>Created with <a href="https://github.com/domchristie/turndown">Turndown</a>, <a href="https://github.com/showdownjs/showdown">Showdown</a>, and <a href="https://github.com/eligrey/FileSaver.js/">FileSaver</a>.</p>
+        <p>Created with <a href="https://github.com/domchristie/turndown" target="_blank">Turndown</a>, <a href="https://github.com/showdownjs/showdown" target="_blank">Showdown</a>, and <a href="https://github.com/eligrey/FileSaver.js/" target="_blank">FileSaver</a>.</p>
     </div>
 
 <script>
@@ -91,7 +94,7 @@
             mInput.value = "";
         }
         else if (html){
-            var saveFile = new File([html], "index.html", {});
+            var saveFile = new File([html], "file.html", {});
             saveAs(saveFile);
             html = null;
             hInput.value = "";
