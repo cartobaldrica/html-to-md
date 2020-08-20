@@ -45,22 +45,15 @@
     var turndownService = new TurndownService();
     
     const mInput = document.getElementById("mInput");
-
     mInput.addEventListener("change", handleHtml, false);
-    function handleHtml() {
-        console.log("sup")
-        const fileList = this.files; /* now you can work with the file list */
+    
+    function handleHtml(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
 
-        const numFiles = fileList.length;
-
-        for (let i = 0, numFiles = fileList.length; i < numFiles; i++) {
-            const file = fileList[i];
-            var fileContents;
-
-            Promise.resolve(file.text()).then(function(data){
-                fileContents = data.toString();
-                markdown = turndownService.turndown(fileContents);
-            });
+        reader.readAsText(file);
+        reader.onload=function(){
+            markdown = turndownService.turndown(reader.result);
         }
     }
 
@@ -69,22 +62,15 @@
     var converter = new showdown.Converter();
     
     const hInput = document.getElementById("hInput");
-
     hInput.addEventListener("change", handleMd, false);
 
     function handleMd() {
-        const fileList = this.files; /* now you can work with the file list */
+        var file = event.target.files[0];
+        var reader = new FileReader();
 
-        const numFiles = fileList.length;
-
-        for (let i = 0, numFiles = fileList.length; i < numFiles; i++) {
-            const file = fileList[i];
-            var fileContents;
-
-            Promise.resolve(file.text()).then(function(data){
-                fileContents = data.toString();
-                html  = converter.makeHtml(fileContents);
-            });
+        reader.readAsText(file);
+        reader.onload=function(){
+            html = converter.makeHtml(reader.result);
         }
     }
 
