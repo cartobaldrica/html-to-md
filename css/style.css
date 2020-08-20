@@ -1,11 +1,10 @@
 body{
-    background:#CCFFCC;
     font-family: 'Roboto', sans-serif;
 }
 h1{
     text-align:left;
     margin:100px 0 40px;
-    color:#4C0099;
+    color:red;
     background:none;
     font-size:65px;
 }

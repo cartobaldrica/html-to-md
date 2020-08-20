@@ -35,15 +35,14 @@
     </div>
 
 <script>
-    var markdown;
-    var html;
     ////////to MD////////////
+    var markdown;
     var turndownService = new TurndownService();
     
     const mInput = document.getElementById("mInput");
 
-    mInput.addEventListener("change", handleFiles, false);
-    function handleFiles() {
+    mInput.addEventListener("change", handleHtml, false);
+    function handleHtml() {
         const fileList = this.files; /* now you can work with the file list */
 
         const numFiles = fileList.length;
@@ -59,26 +58,15 @@
         }
     }
 
-    function downloadFile(type){
-        if (markdown){
-            var saveFile = new File([markdown], "markdown.md", {});
-            saveAs(saveFile);
-            markdown = null;
-        }
-        else if (html){
-            var saveFile = new File([html], "index.html", {});
-            saveAs(saveFile);
-            html = null;
-        }
-        else
-            alert("No File Selected!");
-    }
     ////////to html////////////    
+    var html;
+    var converter = new showdown.Converter();
+    
     const hInput = document.getElementById("hInput");
 
-    hInput.addEventListener("change", handleFiles2, false);
+    hInput.addEventListener("change", handleMd, false);
 
-    function handleFiles2() {
+    function handleMd() {
         const fileList = this.files; /* now you can work with the file list */
 
         const numFiles = fileList.length;
@@ -89,13 +77,27 @@
 
             Promise.resolve(file.text()).then(function(data){
                 fileContents = data.toString();
-                var converter = new showdown.Converter();
-                
                 html  = converter.makeHtml(fileContents);
-
-                console.log(html);
             });
         }
+    }
+
+    ////////file download////////////   
+    function downloadFile(type){
+        if (markdown){
+            var saveFile = new File([markdown], "markdown.md", {});
+            saveAs(saveFile);
+            markdown = null;
+            mInput.value = "";
+        }
+        else if (html){
+            var saveFile = new File([html], "index.html", {});
+            saveAs(saveFile);
+            html = null;
+            hInput.value = "";
+        }
+        else
+            alert("No File Selected!");
     }
 </script>
 
