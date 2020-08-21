@@ -43,6 +43,18 @@
     ////////to MD////////////
     var markdown;
     var turndownService = new TurndownService({emDelimeter:'*', bulletListMarker:'-'});
+
+    turndownService.addRule('underline', {
+        filter: function(node, options){
+            return(
+                node.nodeName === 'SPAN' &&
+                node.style.textDecoration === 'underline'
+            )
+        },
+        replacement: function (content) {
+            return '<ins>' + content + '</ins>'
+        }
+    })
     
     const mInput = document.getElementById("mInput");
     mInput.addEventListener("change", handleHtml, false);
