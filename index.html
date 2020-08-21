@@ -42,7 +42,7 @@
 <script>
     ////////to MD////////////
     var markdown;
-    var turndownService = new TurndownService();
+    var turndownService = new TurndownService({emDelimeter:'*'});
     
     const mInput = document.getElementById("mInput");
     mInput.addEventListener("change", handleHtml, false);
